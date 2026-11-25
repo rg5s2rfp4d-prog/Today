@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>MONO GLASS · 極簡黑白液態玻璃生活手帳</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter, Instrument Serif & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================================================
+       Monochrome Editorial & iOS Native Liquid Glass Design System
+       Zero chromatic colors · Pure Obsidian, Graphite, Silver & Frost White
+       ========================================================================== */
+    :root {
+      --bg-base: #f2f2f5;
+      --bg-gradient-1: #ffffff;
+      --bg-gradient-2: #e6e6eb;
+      --bg-gradient-3: #d9d9e0;
+
+      --glass-surface: rgba(255, 255, 255, 0.64);
+      --glass-surface-elevated: rgba(255, 255, 255, 0.86);
+      --glass-surface-subtle: rgba(255, 255, 255, 0.44);
+      --glass-dock: rgba(255, 255, 255, 0.74);
+
+      --glass-border: rgba(0, 0, 0, 0.09);
+      --glass-border-strong: rgba(0, 0, 0, 0.18);
+      --glass-specular: inset 0 1px 0.5px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+      --glass-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+
+      --text-primary: #0a0a0a;
+      --text-secondary: #48484a;
+      --text-tertiary: #8e8e93;
+
+      --ink-solid: #0a0a0a;
+      --ink-solid-text: #ffffff;
+      --ink-muted-fill: rgba(10, 10, 10, 0.07);
+      --ink-track: rgba(10, 10, 10, 0.10);
+      --ink-glow: rgba(0, 0, 0, 0.16);
+
+      --spring-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html.dark {
+      --bg-base: #050506;
+      --bg-gradient-1: #161618;
+      --bg-gradient-2: #0a0a0b;
+      --bg-gradient-3: #000000;
+
+      --glass-surface: rgba(22, 22, 24, 0.66);
+      --glass-surface-elevated: rgba(28, 28, 31, 0.88);
+      --glass-surface-subtle: rgba(255, 255, 255, 0.035);
+      --glass-dock: rgba(20, 20, 22, 0.78);
+
+      --glass-border: rgba(255, 255, 255, 0.11);
+      --glass-border-strong: rgba(255, 255, 255, 0.24);
+      --glass-specular: inset 0 1px 0.5px rgba(255, 255, 255, 0.22), inset 0 -1px 1px rgba(0, 0, 0, 0.55);
+      --glass-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.75), 0 4px 12px -2px rgba(0, 0, 0, 0.45);
+
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-tertiary: #6e6e73;
+
+      --ink-solid: #ffffff;
+      --ink-solid-text: #0a0a0a;
+      --ink-muted-fill: rgba(255, 255, 255, 0.08);
+      --ink-track: rgba(255, 255, 255, 0.12);
+      --ink-glow: rgba(255, 255, 255, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Noto Sans TC', sans-serif;
+      color: var(--text-primary);
+      margin: 0;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background-color: var(--bg-base);
+      transition: background-color 0.4s var(--spring-ease), color 0.35s var(--spring-ease);
+      letter-spacing: -0.01em;
+    }
+
+    .editorial-num {
+      font-family: 'Instrument Serif', 'SF Pro Display', Georgia, serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* Monochrome Liquid Light & Noise Texture Backdrop */
+    .mono-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: radial-gradient(circle at 18% 12%, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 48%, var(--bg-gradient-3) 100%);
+      transition: background 0.6s ease;
+    }
+
+    .mono-light-orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(88px);
+      pointer-events: none;
+      animation: floatLight 22s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 58vw;
+      height: 58vw;
+      max-width: 540px;
+      max-height: 540px;
+      top: -14%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
+    }
+
+    .orb-2 {
+      width: 62vw;
+      height: 62vw;
+      max-width: 580px;
+      max-height: 580px;
+      bottom: -16%;
+      right: 2%;
+      background: radial-gradient(circle, rgba(160, 160, 170, 0.28), rgba(0, 0, 0, 0));
+      animation-delay: -8s;
+    }
+
+    html.dark .orb-1 {
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0));
+    }
+    html.dark .orb-2 {
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.045), rgba(0, 0, 0, 0));
+    }
+
+    /* Subtle Editorial Film Grain Overlay */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.028;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    @keyframes floatLight {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(22px, -16px) scale(1.05); }
+      100% { transform: translate(-16px, 20px) scale(0.97); }
+    }
+
+    /* ==========================================================================
+       Monochrome Liquid Glass Surfaces
+       ========================================================================== */
+    .liquid-glass {
+      background: var(--glass-surface);
+      backdrop-filter: blur(30px) saturate(110%);
+      -webkit-backdrop-filter: blur(30px) saturate(110%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow), var(--glass-specular);
+      transition: transform 0.3s var(--spring-ease), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .liquid-glass-elevated {
+      background: var(--glass-surface-elevated);
+      backdrop-filter: blur(38px) saturate(115%);
+      -webkit-backdrop-filter: blur(38px) saturate(115%);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: 0 24px 56px -12px rgba(0, 0, 0, 0.38), var(--glass-specular);
+    }
+
+    .liquid-glass-subtle {
+      background: var(--glass-surface-subtle);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .liquid-pill-btn {
+      background: var(--glass-surface-subtle);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-specular);
+      color: var(--text-primary);
+      transition: all 0.24s var(--spring-ease);
+    }
+
+    .liquid-pill-btn:hover {
+      background: var(--ink-muted-fill);
+      border-color: var(--glass-border-strong);
+    }
+
+    .liquid-pill-btn:active {
+      transform: scale(0.95);
+    }
+
+    .mono-solid-btn {
+      background: var(--ink-solid);
+      color: var(--ink-solid-text);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: 0 6px 18px var(--ink-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: all 0.24s var(--spring-ease);
+    }
+
+    .mono-solid-btn:active {
+      transform: scale(0.95);
+    }
+
+    .mono-badge {
+      background: var(--ink-muted-fill);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       Right-Side Vertical Control Dock (右側直向控制列設計)
+       Ergonomically tuned for iPhone & iPhone Duo
+       ========================================================================== */
+    .right-vertical-dock {
+      position: fixed;
+      right: calc(10px + var(--safe-right));
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 45;
+      width: 54px;
+      padding: 8px 6px;
+      border-radius: 999px;
+      background: var(--glass-dock);
+      backdrop-filter: blur(34px) saturate(110%);
+      -webkit-backdrop-filter: blur(34px) saturate(110%);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22), var(--glass-specular);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dock-item {
+      position: relative;
+      width: 42px;
+      height: 46px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.28s var(--spring-ease);
+      border: 1px solid transparent;
+    }
+
+    .dock-item:hover {
+      background: var(--ink-muted-fill);
+      color: var(--text-primary);
+    }
+
+    .dock-item:active {
+      transform: scale(0.9);
+    }
+
+    .dock-item.active {
+      background: var(--ink-solid);
+      color: var(--ink-solid-text);
+      border-color: var(--glass-border-strong);
+      box-shadow: 0 6px 16px var(--ink-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transform: scale(1.04);
+    }
+
+    .dock-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .dock-divider {
+      width: 22px;
+      height: 1px;
+      background: var(--glass-border-strong);
+      margin: 2px 0;
+    }
+
+    /* Main Workspace Safe Padding so Right Dock never overlaps content */
+    .main-viewport {
+      padding-top: calc(16px + var(--safe-top));
+      padding-bottom: calc(36px + var(--safe-bottom));
+      padding-left: 16px;
+      padding-right: calc(74px + var(--safe-right));
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* iPhone Duo & Dual-Pane Responsive Grid Adaptation */
+    @media (min-width: 680px) {
+      .main-viewport {
+        padding-left: 24px;
+        padding-right: calc(84px + var(--safe-right));
+      }
+      .duo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        align-items: start;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .right-vertical-dock {
+        right: 22px;
+        width: 62px;
+        padding: 10px 7px;
+        gap: 8px;
+      }
+      .dock-item {
+        width: 48px;
+        height: 52px;
+      }
+      .dock-label {
+        font-size: 10px;
+      }
+      .main-viewport {
+        padding-right: 104px;
+      }
+    }
+
+    /* Spring View Transitions */
+    .view-enter {
+      animation: viewSpringIn 0.36s var(--spring-ease) forwards;
+    }
+
+    @keyframes viewSpringIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.988);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Monochrome Glass Checkbox */
+    .glass-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 1.5px solid var(--text-tertiary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.24s var(--spring-ease);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .glass-checkbox.checked {
+      background: var(--ink-solid);
+      border-color: var(--ink-solid);
+      color: var(--ink-solid-text);
+      box-shadow: 0 3px 10px var(--ink-glow);
+      transform: scale(1.04);
+    }
+
+    /* Modal Backdrop */
+    .glass-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.48);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Monochrome Priority Focus Highlight */
+    .priority-card-highlight {
+      border-left: 3px solid var(--ink-solid);
+      background: linear-gradient(90deg, var(--ink-muted-fill) 0%, var(--glass-surface-subtle) 100%);
+    }
+
+    /* Monochrome Grayscale Emoji Option for Minimalist Purity */
+    .mono-symbol {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Monochrome Liquid Light & Subtle Grain Backdrop -->
+  <div class="mono-backdrop">
+    <div class="mono-light-orb orb-1"></div>
+    <div class="mono-light-orb orb-2"></div>
+  </div>
+  <div class="noise-overlay"></div>
+
+  <!-- ========================================================================
+       Right-Side Vertical Control Bar (右側直向控制列設計)
+       ======================================================================== -->
+  <nav class="right-vertical-dock" aria-label="Primary Navigation">
+    <button id="nav-today" onclick="switchView('today')" class="dock-item active" title="今日主頁 / Today">
+      <i data-lucide="disc" class="w-4 h-4"></i>
+      <span class="dock-label" data-i18n="navToday">今日</span>
+    </button>
+
+    <button id="nav-week" onclick="switchView('week')" class="dock-item" title="週檢視 / Week">
+      <i data-lucide="columns-3" class="w-4 h-4"></i>
+      <span class="dock-label" data-i18n="navWeek">週視</span>
+    </button>
+
+    <button id="nav-month" onclick="switchView('month')" class="dock-item" title="月曆檢視 / Month">
+      <i data-lucide="calendar" class="w-4 h-4"></i>
+      <span class="dock-label" data-i18n="navMonth">月曆</span>
+    </button>
+
+    <button id="nav-year" onclick="switchView('year')" class="dock-item" title="年度檢視與目標 / Year & Goals">
+      <i data-lucide="compass" class="w-4 h-4"></i>
+      <span class="dock-label" data-i18n="navYear">年度</span>
+    </button>
+
+    <div class="dock-divider"></div>
+
+    <!-- Language Toggle Button (中英文切換) -->
+    <button id="nav-lang" onclick="toggleLanguage()" class="dock-item" title="切換語言 / Switch Language">
+      <i data-lucide="languages" class="w-4 h-4"></i>
+      <span id="lang-badge" class="dock-label">EN</span>
+    </button>
+
+    <!-- Monochrome Theme Toggle (曜石黑 / 純白霜玻璃切換) -->
+    <button id="nav-theme" onclick="toggleTheme()" class="dock-item" title="黑白模式切換 / Obsidian & Frost">
+      <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+      <span class="dock-label" data-i18n="navTheme">黑白</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================================
+       Main Application Viewport
+       ======================================================================== -->
+  <main class="main-viewport">
+    <!-- Top Compact Monochrome Glass Header Bar -->
+    <header class="liquid-glass rounded-3xl px-4 py-3 mb-4 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-2xl mono-solid-btn flex items-center justify-center font-bold shrink-0">
+          <i data-lucide="aperture" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <h1 id="header-title" class="text-base sm:text-lg font-bold tracking-tight truncate">今日主頁</h1>
+            <span id="today-pill" onclick="jumpToToday()" class="hidden cursor-pointer text-[11px] font-semibold px-2.5 py-0.5 rounded-full mono-badge">
+              回到今天
+            </span>
+          </div>
+          <p id="header-subtitle" class="text-xs opacity-65 truncate">2026年11月25日 · 星期三</p>
+        </div>
+      </div>
+
+      <!-- Quick Date Stepper & Data Backup Trigger -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="stepSelectedDate(-1)" class="w-9 h-9 rounded-full liquid-pill-btn flex items-center justify-center" aria-label="Previous Day">
+          <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        </button>
+        <button onclick="jumpToToday()" class="px-3 h-9 rounded-full liquid-pill-btn text-xs font-semibold" data-i18n="todayBtn">
+          今天
+        </button>
+        <button onclick="stepSelectedDate(1)" class="w-9 h-9 rounded-full liquid-pill-btn flex items-center justify-center" aria-label="Next Day">
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+        <button onclick="openBackupModal()" class="w-9 h-9 rounded-full liquid-pill-btn flex items-center justify-center ml-0.5" title="資料備份與相容中心 (#41777)">
+          <i data-lucide="archive" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic View Container -->
+    <div id="app-content" class="view-enter"></div>
+  </main>
+
+  <!-- ========================================================================
+       Modals (Task Edit, Custom Mood, Annual Goal, Data Backup)
+       ======================================================================== -->
+  <div id="modal-root"></div>
+
+  <!-- Toast Notification Pill -->
+  <div id="toast-container" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none flex flex-col items-center gap-2"></div>
+
+  <script>
+    /* ==========================================================================
+       1. Safe Backward-Compatible Storage & Legacy Migration Engine (#41777)
+       ========================================================================== */
+    const STORAGE_KEY = 'aether_glass_life_os_v1';
+    const LEGACY_BACKUP_KEY = 'aether_glass_legacy_snapshot_41777';
+
+    // Pure Monochrome Geometric / Minimalist Mood Symbols
+    const DEFAULT_MOODS = [
+      { id: 'joy', emoji: '☀︎', zh: '澄明', en: 'Radiant' },
+      { id: 'calm', emoji: '○', zh: '靜謐', en: 'Calm' },
+      { id: 'focus', emoji: '◈', zh: '專注', en: 'Focused' },
+      { id: 'tired', emoji: '◐', zh: '微倦', en: 'Weary' },
+      { id: 'low', emoji: '●', zh: '沉澱', en: 'Reflective' }
+    ];
+
+    const DEFAULT_HABITS = [
+      { id: 'hab_water', title: '晨間純水 2000ml', titleEn: 'Hydrate 2000ml', icon: '◇', createdAt: '2026-01-01' },
+      { id: 'hab_read', title: '深度閱讀 20 分鐘', titleEn: 'Deep Reading 20m', icon: '▣', createdAt: '2026-01-01' },
+      { id: 'hab_walk', title: '靜心步行與伸展', titleEn: 'Walk & Stretch', icon: '△', createdAt: '2026-01-01' }
+    ];
+
+    function formatDateKey(dateObj) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function parseDateKey(dateStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    const TODAY_KEY = formatDateKey(new Date());
+
+    // Application State (Defaulting to Obsidian Dark Monochrome for Leica / iOS 26 aesthetic)
+    let state = {
+      lang: 'zh',       // 'zh' | 'en'
+      theme: 'dark',    // 'dark' (Obsidian Black) | 'light' (Pure Frost White)
+      activeView: 'today',
+      selectedDate: TODAY_KEY,
+      calendarMonth: TODAY_KEY.slice(0, 7),
+      selectedYear: new Date().getFullYear(),
+
+      // User Data Entities
+      tasks: [],        // { id, title, date, note, completed, priority, createdAt }
+      habits: [],       // { id, title, titleEn, icon, createdAt }
+      habitLogs: {},    // { 'YYYY-MM-DD': ['hab_id_1', ...] }
+      journals: {},     // { 'YYYY-MM-DD': { content, updatedAt } }
+      moodLogs: {},     // { 'YYYY-MM-DD': 'mood_id' }
+      customMoods: [],  // { id, emoji, zh, en }
+      annualGoals: []   // { id, year, title, category, progress, completed, createdAt }
+    };
+
+    /**
+     * Non-destructive migration & bidirectional compatibility with localStorage #41777
+     * Preserves every existing task, habit, journal entry, mood, and goal.
+     */
+    function loadAndMigrateStorage() {
+      let existingMain = null;
+      try {
+        const rawMain = localStorage.getItem(STORAGE_KEY);
+        if (rawMain) existingMain = JSON.parse(rawMain);
+      } catch (e) {
+        console.warn('Error reading main storage:', e);
+      }
+
+      if (existingMain && typeof existingMain === 'object') {
+        state = {
+          ...state,
+          ...existingMain,
+          tasks: Array.isArray(existingMain.tasks) ? existingMain.tasks : [],
+          habits: Array.isArray(existingMain.habits) ? existingMain.habits : [],
+          habitLogs: existingMain.habitLogs && typeof existingMain.habitLogs === 'object' ? existingMain.habitLogs : {},
+          journals: existingMain.journals && typeof existingMain.journals === 'object' ? existingMain.journals : {},
+          moodLogs: existingMain.moodLogs && typeof existingMain.moodLogs === 'object' ? existingMain.moodLogs : {},
+          customMoods: Array.isArray(existingMain.customMoods) ? existingMain.customMoods : [],
+          annualGoals: Array.isArray(existingMain.annualGoals) ? existingMain.annualGoals : []
+        };
+      }
+
+      // Scan all localStorage keys for legacy data (#41777, tasks, todos, habits, journal, moods, etc.)
+      const legacySnapshot = {};
+      let migratedCount = 0;
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || key === STORAGE_KEY || key === LEGACY_BACKUP_KEY) continue;
+
+        const rawVal = localStorage.getItem(key);
+        if (!rawVal) continue;
+        legacySnapshot[key] = rawVal;
+
+        try {
+          const parsed = JSON.parse(rawVal);
+          const lowerKey = key.toLowerCase();
+
+          // 1. Migrate legacy tasks / todos arrays
+          if ((lowerKey.includes('task') || lowerKey.includes('todo') || lowerKey.includes('41777')) && Array.isArray(parsed)) {
+            parsed.forEach((item, idx) => {
+              if (!item) return;
+              const title = typeof item === 'string' ? item : (item.title || item.text || item.name || item.content);
+              if (!title) return;
+              const id = item.id ? String(item.id) : `legacy_task_${key}_${idx}_${title.slice(0, 8)}`;
+              if (!state.tasks.some(t => String(t.id) === id || (t.title === title && t.date === (item.date || TODAY_KEY)))) {
+                state.tasks.push({
+                  id,
+                  title: String(title),
+                  note: item.note || item.desc || '',
+                  date: item.date || item.dueDate || TODAY_KEY,
+                  completed: Boolean(item.completed || item.done || item.isCompleted),
+                  priority: Boolean(item.priority || item.important || item.starred || item.isPriority),
+                  createdAt: item.createdAt || new Date().toISOString()
+                });
+                migratedCount++;
+              }
+            });
+          }
+
+          // 2. Migrate composite planner object
+          if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+            if (Array.isArray(parsed.tasks)) {
+              parsed.tasks.forEach((t, idx) => {
+                if (t && (t.title || t.text)) {
+                  const id = String(t.id || `legacy_obj_task_${idx}`);
+                  if (!state.tasks.some(x => String(x.id) === id)) {
+                    state.tasks.push({
+                      id,
+                      title: t.title || t.text,
+                      note: t.note || '',
+                      date: t.date || TODAY_KEY,
+                      completed: Boolean(t.completed || t.done),
+                      priority: Boolean(t.priority || t.important),
+                      createdAt: t.createdAt || new Date().toISOString()
+                    });
+                    migratedCount++;
+                  }
+                }
+              });
+            }
+            if (Array.isArray(parsed.habits)) {
+              parsed.habits.forEach((h, idx) => {
+                if (h && (h.title || h.name)) {
+                  const id = String(h.id || `legacy_hab_${idx}`);
+                  if (!state.habits.some(x => String(x.id) === id)) {
+                    state.habits.push({
+                      id,
+                      title: h.title || h.name,
+                      titleEn: h.titleEn || h.title || h.name,
+                      icon: h.icon || h.emoji || '◇',
+                      createdAt: h.createdAt || TODAY_KEY
+                    });
+                    migratedCount++;
+                  }
+                }
+              });
+            }
+            if (parsed.journals && typeof parsed.journals === 'object') {
+              Object.entries(parsed.journals).forEach(([dKey, jVal]) => {
+                if (!state.journals[dKey] && jVal) {
+                  state.journals[dKey] = typeof jVal === 'string'
+                    ? { content: jVal, updatedAt: new Date().toISOString() }
+                    : jVal;
+                  migratedCount++;
+                }
+              });
+            }
+            if (parsed.moods && typeof parsed.moods === 'object' && !Array.isArray(parsed.moods)) {
+              Object.entries(parsed.moods).forEach(([dKey, mVal]) => {
+                if (!state.moodLogs[dKey] && mVal) {
+                  state.moodLogs[dKey] = mVal;
+                  migratedCount++;
+                }
+              });
+            }
+            if (Array.isArray(parsed.goals || parsed.annualGoals)) {
+              (parsed.goals || parsed.annualGoals).forEach((g, idx) => {
+                if (g && g.title) {
+                  const id = String(g.id || `legacy_goal_${idx}`);
+                  if (!state.annualGoals.some(x => String(x.id) === id)) {
+                    state.annualGoals.push({
+                      id,
+                      year: g.year || new Date().getFullYear(),
+                      title: g.title,
+                      category: g.category || 'Personal',
+                      progress: Number(g.progress || 0),
+                      completed: Boolean(g.completed),
+                      createdAt: g.createdAt || new Date().toISOString()
+                    });
+                    migratedCount++;
+                  }
+                }
+              });
+            }
+          }
+
+          // 3. Migrate standalone habits array
+          if (lowerKey.includes('habit') && Array.isArray(parsed)) {
+            parsed.forEach((h, idx) => {
+              const title = typeof h === 'string' ? h : (h.title || h.name);
+              if (!title) return;
+              const id = String(h.id || `legacy_habit_${idx}`);
+              if (!state.habits.some(x => String(x.id) === id || x.title === title)) {
+                state.habits.push({
+                  id,
+                  title,
+                  titleEn: h.titleEn || title,
+                  icon: h.icon || h.emoji || '◇',
+                  createdAt: TODAY_KEY
+                });
+                migratedCount++;
+              }
+            });
+          }
+
+          // 4. Migrate standalone journal map
+          if (lowerKey.includes('journal') && parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+            Object.entries(parsed).forEach(([dKey, entry]) => {
+              if (!state.journals[dKey] && entry) {
+                state.journals[dKey] = typeof entry === 'string'
+                  ? { content: entry, updatedAt: new Date().toISOString() }
+                  : entry;
+                migratedCount++;
+              }
+            });
+          }
+        } catch (err) {
+          if (key.toLowerCase().includes('journal') && rawVal.trim().length > 0 && !state.journals[TODAY_KEY]) {
+            state.journals[TODAY_KEY] = { content: rawVal, updatedAt: new Date().toISOString() };
+            migratedCount++;
+          }
+        }
+      }
+
+      if (Object.keys(legacySnapshot).length > 0 && !localStorage.getItem(LEGACY_BACKUP_KEY)) {
+        try {
+          localStorage.setItem(LEGACY_BACKUP_KEY, JSON.stringify(legacySnapshot));
+        } catch (e) {}
+      }
+
+      // Seed minimalist starter items ONLY if completely empty (zero existing user data)
+      if (!existingMain && migratedCount === 0 && state.tasks.length === 0 && state.habits.length === 0) {
+        state.habits = [...DEFAULT_HABITS];
+        state.tasks = [
+          {
+            id: 'welcome_1',
+            title: '聚焦今日最關鍵的三項核心任務',
+            note: '保持純粹與專注，逐一完成',
+            date: TODAY_KEY,
+            completed: false,
+            priority: true,
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 'welcome_2',
+            title: '整理晚間思緒與隨手日記',
+            note: '',
+            date: TODAY_KEY,
+            completed: false,
+            priority: false,
+            createdAt: new Date().toISOString()
+          }
+        ];
+        state.annualGoals = [
+          {
+            id: 'goal_demo_1',
+            year: new Date().getFullYear(),
+            title: '建立極簡高專注的日常創作與閱讀節奏',
+            category: '核心秩序',
+            progress: 40,
+            completed: false,
+            createdAt: new Date().toISOString()
+          }
+        ];
+      }
+
+      // Always land on Today Home on initial entry
+      state.selectedDate = TODAY_KEY;
+      state.calendarMonth = TODAY_KEY.slice(0, 7);
+      state.activeView = 'today';
+
+      saveState();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error('Failed to save to localStorage:', e);
+        showToast(state.lang === 'zh' ? '儲存空間已滿，建議匯出備份' : 'Storage full, consider exporting backup');
+      }
+    }
+
+    /* ==========================================================================
+       2. Bilingual Dictionary (繁體中文 / English)
+       ========================================================================== */
+    const I18N = {
+      zh: {
+        navToday: '今日',
+        navWeek: '週視',
+        navMonth: '月曆',
+        navYear: '年度',
+        navTheme: '黑白',
+        todayBtn: '今天',
+        backToToday: '回到今天',
+        viewTitleToday: '今日主頁',
+        viewTitleWeek: '週計畫檢視',
+        viewTitleMonth: '月曆總覽',
+        viewTitleYear: '年度檢視與目標',
+        dailyProgress: '今日完成度',
+        prioritySection: '重點任務',
+        todoSection: '今日待辦事項',
+        addTaskPlaceholder: '新增待辦事項...',
+        addBtn: '新增',
+        noPriorityTasks: '尚未標記重點任務，點擊星號置頂關鍵事項',
+        noTasksToday: '這天尚無待辦事項，保持留白或新增計畫',
+        habitSection: '每日習慣管理',
+        addHabitBtn: '新增習慣',
+        streakUnit: '天連續',
+        moodSection: '今日心情紀錄',
+        customMoodBtn: '+ 自訂心情',
+        journalSection: '隨手日記',
+        journalPlaceholder: '記錄此刻的思考、觀察或純粹片刻...',
+        savedAuto: '已自動儲存於本機',
+        charsCount: '字',
+        weekSummary: '本週節奏總覽',
+        tasksDoneLabel: '任務完成',
+        habitsDoneLabel: '習慣達成',
+        selectedDayPreview: '選定日期摘要',
+        openInToday: '編輯此日詳情',
+        yearHeatmapTitle: '年度活躍與心情矩陣',
+        annualGoalsTitle: '年度核心目標',
+        addGoalBtn: '新增目標',
+        noGoalsYet: '設定今年的北極星目標，以黑白刻度追蹤實現進度',
+        editTaskTitle: '編輯任務',
+        saveBtn: '儲存變更',
+        cancelBtn: '取消',
+        deleteBtn: '刪除',
+        createMoodTitle: '新增自訂心情',
+        moodSymbolLabel: '代表符號 / 字元',
+        moodNameZhLabel: '中文名稱',
+        moodNameEnLabel: '英文名稱 (選填)',
+        createHabitTitle: '新增每日習慣',
+        habitIconLabel: '習慣符號',
+        habitNameLabel: '習慣名稱',
+        createGoalTitle: '年度目標設定',
+        goalTitleLabel: '目標名稱',
+        goalCategoryLabel: '領域標籤',
+        goalProgressLabel: '目前達成進度',
+        backupTitle: '資料保存與相容中心 (#41777)',
+        backupDesc: '所有任務、習慣、隨手日記與自訂心情皆安全儲存於您的瀏覽器 localStorage，並完整保留舊版資料。',
+        exportJsonBtn: '匯出 JSON 備份檔',
+        importJsonBtn: '匯入 JSON 還原'
+      },
+      en: {
+        navToday: 'Today',
+        navWeek: 'Week',
+        navMonth: 'Month',
+        navYear: 'Year',
+        navTheme: 'Mono',
+        todayBtn: 'Today',
+        backToToday: 'Back to Today',
+        viewTitleToday: 'Today Home',
+        viewTitleWeek: 'Week Overview',
+        viewTitleMonth: 'Month Calendar',
+        viewTitleYear: 'Year & Annual Goals',
+        dailyProgress: 'Daily Completion',
+        prioritySection: 'Priority Focus',
+        todoSection: 'To-Do List',
+        addTaskPlaceholder: 'Add a new task...',
+        addBtn: 'Add',
+        noPriorityTasks: 'No priority tasks yet. Tap the star icon to pin key tasks.',
+        noTasksToday: 'No tasks scheduled for this day.',
+        habitSection: 'Daily Habits',
+        addHabitBtn: 'New Habit',
+        streakUnit: 'd streak',
+        moodSection: 'Mood Check-in',
+        customMoodBtn: '+ Custom',
+        journalSection: 'Quick Journal',
+        journalPlaceholder: 'Capture thoughts, observations, or quiet moments...',
+        savedAuto: 'Auto-saved locally',
+        charsCount: 'chars',
+        weekSummary: 'Weekly Rhythm',
+        tasksDoneLabel: 'Tasks Done',
+        habitsDoneLabel: 'Habits Done',
+        selectedDayPreview: 'Selected Date Summary',
+        openInToday: 'Open & Edit Day',
+        yearHeatmapTitle: 'Annual Activity Matrix',
+        annualGoalsTitle: 'Annual Goals',
+        addGoalBtn: 'Add Goal',
+        noGoalsYet: 'Set your North Star goals for the year and track steady progress.',
+        editTaskTitle: 'Edit Task',
+        saveBtn: 'Save Changes',
+        cancelBtn: 'Cancel',
+        deleteBtn: 'Delete',
+        createMoodTitle: 'Create Custom Mood',
+        moodSymbolLabel: 'Symbol / Glyph',
+        moodNameZhLabel: 'Chinese Label',
+        moodNameEnLabel: 'English Label',
+        createHabitTitle: 'New Daily Habit',
+        habitIconLabel: 'Habit Symbol',
+        habitNameLabel: 'Habit Name',
+        createGoalTitle: 'Annual Goal',
+        goalTitleLabel: 'Goal Title',
+        goalCategoryLabel: 'Category',
+        goalProgressLabel: 'Current Progress',
+        backupTitle: 'Data Persistence & Compatibility (#41777)',
+        backupDesc: 'All tasks, habits, journals, and custom moods are safely persisted in localStorage with full legacy data preservation.',
+        exportJsonBtn: 'Export JSON Backup',
+        importJsonBtn: 'Import JSON Backup'
+      }
+    };
+
+    function t(key) {
+      return (I18N[state.lang] && I18N[state.lang][key]) || I18N.zh[key] || key;
+    }
+
+    function formatHumanDate(dateStr, lang = state.lang) {
+      const d = parseDateKey(dateStr);
+      if (lang === 'zh') {
+        const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 · ${weekdays[d.getDay()]}`;
+      } else {
+        return d.toLocaleDateString('en-US', {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      }
+    }
+
+    /* ==========================================================================
+       3. Navigation, Theme & Language Controls
+       ========================================================================== */
+    function switchView(viewName) {
+      state.activeView = viewName;
+      saveState();
+      renderApp();
+    }
+
+    function toggleLanguage() {
+      state.lang = state.lang === 'zh' ? 'en' : 'zh';
+      saveState();
+      renderApp();
+      showToast(state.lang === 'zh' ? '已切換至繁體中文' : 'Switched to English');
+    }
+
+    function toggleTheme() {
+      state.theme = state.theme === 'light' ? 'dark' : 'light';
+      applyTheme();
+      saveState();
+      showToast(state.theme === 'dark'
+        ? (state.lang === 'zh' ? '曜石黑玻璃模式' : 'Obsidian Glass')
+        : (state.lang === 'zh' ? '純白霜玻璃模式' : 'Frost White Glass'));
+    }
+
+    function applyTheme() {
+      const htmlEl = document.documentElement;
+      if (state.theme === 'dark') {
+        htmlEl.classList.add('dark');
+      } else {
+        htmlEl.classList.remove('dark');
+      }
+      const iconEl = document.getElementById('theme-icon');
+      if (iconEl) {
+        iconEl.setAttribute('data-lucide', state.theme === 'dark' ? 'sun' : 'moon');
+      }
+    }
+
+    function stepSelectedDate(deltaDays) {
+      const d = parseDateKey(state.selectedDate);
+      d.setDate(d.getDate() + deltaDays);
+      state.selectedDate = formatDateKey(d);
+      state.calendarMonth = state.selectedDate.slice(0, 7);
+      state.selectedYear = d.getFullYear();
+      renderApp();
+    }
+
+    function jumpToToday() {
+      state.selectedDate = formatDateKey(new Date());
+      state.calendarMonth = state.selectedDate.slice(0, 7);
+      state.selectedYear = new Date().getFullYear();
+      renderApp();
+    }
+
+    function selectDateAndOpenToday(dateStr) {
+      state.selectedDate = dateStr;
+      state.calendarMonth = dateStr.slice(0, 7);
+      state.activeView = 'today';
+      saveState();
+      renderApp();
+    }
+
+    /* ==========================================================================
+       4. Core Feature Actions (Tasks, Habits, Moods, Journal, Annual Goals)
+       ========================================================================== */
+    // --- Tasks ---
+    function handleAddTask(e) {
+      e.preventDefault();
+      const input = document.getElementById('new-task-input');
+      const priorityBtn = document.getElementById('new-task-priority-flag');
+      if (!input) return;
+      const title = input.value.trim();
+      if (!title) return;
+
+      const isPriority = priorityBtn && priorityBtn.dataset.priority === 'true';
+      state.tasks.unshift({
+        id: 'task_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        title,
+        note: '',
+        date: state.selectedDate,
+        completed: false,
+        priority: isPriority,
+        createdAt: new Date().toISOString()
+      });
+
+      saveState();
+      renderApp();
+    }
+
+    function toggleNewTaskPriorityFlag() {
+      const btn = document.getElementById('new-task-priority-flag');
+      if (!btn) return;
+      const next = btn.dataset.priority !== 'true';
+      btn.dataset.priority = String(next);
+      btn.classList.toggle('mono-solid-btn', next);
+      btn.classList.toggle('liquid-pill-btn', !next);
+    }
+
+    function toggleTaskComplete(taskId) {
+      const task = state.tasks.find(t => String(t.id) === String(taskId));
+      if (!task) return;
+      task.completed = !task.completed;
+      saveState();
+      renderApp();
+    }
+
+    function toggleTaskPriority(taskId) {
+      const task = state.tasks.find(t => String(t.id) === String(taskId));
+      if (!task) return;
+      task.priority = !task.priority;
+      saveState();
+      renderApp();
+    }
+
+    function deleteTask(taskId) {
+      state.tasks = state.tasks.filter(t => String(t.id) !== String(taskId));
+      saveState();
+      closeModal();
+      renderApp();
+      showToast(state.lang === 'zh' ? '已刪除任務' : 'Task deleted');
+    }
+
+    function openEditTaskModal(taskId) {
+      const task = state.tasks.find(t => String(t.id) === String(taskId));
+      if (!task) return;
+      const modalRoot = document.getElementById('modal-root');
+      modalRoot.innerHTML = `
+        <div class="glass-modal-backdrop" onclick="if(event.target===this) closeModal()">
+          <div class="liquid-glass-elevated rounded-3xl p-5 w-full max-w-md space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold">${t('editTaskTitle')}</h3>
+              <button onclick="closeModal()" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-medium opacity-70 mb-1">${state.lang === 'zh' ? '任務內容' : 'Task Title'}</label>
+                <input id="edit-task-title" type="text" value="${escapeHtml(task.title)}"
+                  class="w-full px-3.5 py-2.5 rounded-2xl liquid-glass-subtle outline-none text-sm font-medium focus:ring-1 focus:ring-current" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium opacity-70 mb-1">${state.lang === 'zh' ? '備註細節 (選填)' : 'Note (Optional)'}</label>
+                <input id="edit-task-note" type="text" value="${escapeHtml(task.note || '')}"
+                  placeholder="${state.lang === 'zh' ? '補充時間或執行細節...' : 'Add time or details...'}"
+                  class="w-full px-3.5 py-2 rounded-2xl liquid-glass-subtle outline-none text-xs" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium opacity-70 mb-1">${state.lang === 'zh' ? '日期' : 'Date'}</label>
+                  <input id="edit-task-date" type="date" value="${task.date}"
+                    class="w-full px-3 py-2 rounded-2xl liquid-glass-subtle outline-none text-xs font-medium" />
+                </div>
+                <div class="flex items-end">
+                  <label class="w-full flex items-center justify-between px-3.5 py-2 rounded-2xl liquid-glass-subtle cursor-pointer">
+                    <span class="text-xs font-medium">${state.lang === 'zh' ? '重點標記' : 'Priority'}</span>
+                    <input id="edit-task-priority" type="checkbox" ${task.priority ? 'checked' : ''} class="accent-neutral-900 dark:accent-white w-4 h-4" />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2">
+              <button onclick="deleteTask('${task.id}')" class="px-3.5 py-2 rounded-2xl text-xs font-semibold liquid-pill-btn opacity-75 hover:opacity-100">
+                ${t('deleteBtn')}
+              </button>
+              <div class="flex items-center gap-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-2xl liquid-pill-btn text-xs font-semibold">${t('cancelBtn')}</button>
+                <button onclick="saveEditedTask('${task.id}')" class="px-4 py-2 rounded-2xl mono-solid-btn text-xs font-semibold">${t('saveBtn')}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function saveEditedTask(taskId) {
+      const task = state.tasks.find(t => String(t.id) === String(taskId));
+      if (!task) return;
+      const newTitle = document.getElementById('edit-task-title').value.trim();
+      const newNote = document.getElementById('edit-task-note').value.trim();
+      const newDate = document.getElementById('edit-task-date').value || task.date;
+      const newPriority = document.getElementById('edit-task-priority').checked;
+      if (newTitle) {
+        task.title = newTitle;
+        task.note = newNote;
+        task.date = newDate;
+        task.priority = newPriority;
+        saveState();
+      }
+      closeModal();
+      renderApp();
+    }
+
+    // --- Habits ---
+    function toggleHabitForDate(habitId, dateStr = state.selectedDate) {
+      if (!state.habitLogs[dateStr]) state.habitLogs[dateStr] = [];
+      const idx = state.habitLogs[dateStr].indexOf(habitId);
+      if (idx >= 0) {
+        state.habitLogs[dateStr].splice(idx, 1);
+      } else {
+        state.habitLogs[dateStr].push(habitId);
+      }
+      saveState();
+      renderApp();
+    }
+
+    function calculateHabitStreak(habitId) {
+      let streak = 0;
+      const cursor = parseDateKey(TODAY_KEY);
+      if (!(state.habitLogs[TODAY_KEY] || []).includes(habitId)) {
+        cursor.setDate(cursor.getDate() - 1);
+      }
+      while (true) {
+        const key = formatDateKey(cursor);
+        if ((state.habitLogs[key] || []).includes(habitId)) {
+          streak++;
+          cursor.setDate(cursor.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    function openHabitModal(habitId = null) {
+      const existing = habitId ? state.habits.find(h => h.id === habitId) : null;
+      const modalRoot = document.getElementById('modal-root');
+      modalRoot.innerHTML = `
+        <div class="glass-modal-backdrop" onclick="if(event.target===this) closeModal()">
+          <div class="liquid-glass-elevated rounded-3xl p-5 w-full max-w-md space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold">${existing ? (state.lang === 'zh' ? '編輯習慣' : 'Edit Habit') : t('createHabitTitle')}</h3>
+              <button onclick="closeModal()" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <div class="space-y-3">
+              <div class="grid grid-cols-4 gap-3">
+                <div>
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('habitIconLabel')}</label>
+                  <input id="habit-icon-input" type="text" maxlength="4" value="${existing ? escapeHtml(existing.icon) : '◇'}"
+                    class="w-full px-3 py-2.5 rounded-2xl liquid-glass-subtle text-center text-lg outline-none" />
+                </div>
+                <div class="col-span-3">
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('habitNameLabel')}</label>
+                  <input id="habit-title-input" type="text" value="${existing ? escapeHtml(existing.title) : ''}"
+                    placeholder="${state.lang === 'zh' ? '例如：冥想 10 分鐘' : 'e.g., Meditate 10 mins'}"
+                    class="w-full px-3.5 py-2.5 rounded-2xl liquid-glass-subtle text-sm outline-none focus:ring-1 focus:ring-current" />
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                ${['◇', '○', '△', '▣', '◈', '✦', '◎', '⬡'].map(sym => `
+                  <button type="button" onclick="document.getElementById('habit-icon-input').value='${sym}'"
+                    class="w-8 h-8 rounded-xl liquid-pill-btn text-xs font-bold flex items-center justify-center">${sym}</button>
+                `).join('')}
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2">
+              ${existing ? `<button onclick="deleteHabit('${existing.id}')" class="px-3.5 py-2 rounded-2xl text-xs font-semibold liquid-pill-btn opacity-75">${t('deleteBtn')}</button>` : '<div></div>'}
+              <div class="flex items-center gap-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-2xl liquid-pill-btn text-xs font-semibold">${t('cancelBtn')}</button>
+                <button onclick="saveHabit('${existing ? existing.id : ''}')" class="px-4 py-2 rounded-2xl mono-solid-btn text-xs font-semibold">${t('saveBtn')}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function saveHabit(habitId) {
+      const icon = (document.getElementById('habit-icon-input').value || '◇').trim();
+      const title = document.getElementById('habit-title-input').value.trim();
+      if (!title) return;
+
+      if (habitId) {
+        const h = state.habits.find(x => x.id === habitId);
+        if (h) {
+          h.icon = icon;
+          h.title = title;
+          h.titleEn = title;
+        }
+      } else {
+        state.habits.push({
+          id: 'hab_' + Date.now(),
+          icon,
+          title,
+          titleEn: title,
+          createdAt: state.selectedDate
+        });
+      }
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function deleteHabit(habitId) {
+      state.habits = state.habits.filter(h => h.id !== habitId);
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    // --- Moods & Custom Moods (Monochrome Geometric / Custom Glyphs) ---
+    function getAllMoods() {
+      return [...DEFAULT_MOODS, ...state.customMoods];
+    }
+
+    function selectMoodForDate(moodId, dateStr = state.selectedDate) {
+      if (state.moodLogs[dateStr] === moodId) {
+        delete state.moodLogs[dateStr];
+      } else {
+        state.moodLogs[dateStr] = moodId;
+      }
+      saveState();
+      renderApp();
+    }
+
+    function openCustomMoodModal() {
+      const modalRoot = document.getElementById('modal-root');
+      modalRoot.innerHTML = `
+        <div class="glass-modal-backdrop" onclick="if(event.target===this) closeModal()">
+          <div class="liquid-glass-elevated rounded-3xl p-5 w-full max-w-md space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold">${t('createMoodTitle')}</h3>
+              <button onclick="closeModal()" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <div class="space-y-3">
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('moodSymbolLabel')}</label>
+                  <input id="custom-mood-emoji" type="text" maxlength="4" value="✦"
+                    class="w-full px-3 py-2.5 rounded-2xl liquid-glass-subtle text-center text-lg outline-none" />
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('moodNameZhLabel')}</label>
+                  <input id="custom-mood-zh" type="text" placeholder="例如：靈感湧現"
+                    class="w-full px-3.5 py-2.5 rounded-2xl liquid-glass-subtle text-sm outline-none focus:ring-1 focus:ring-current" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-medium opacity-70 mb-1">${t('moodNameEnLabel')}</label>
+                <input id="custom-mood-en" type="text" placeholder="e.g., Inspired"
+                  class="w-full px-3.5 py-2.5 rounded-2xl liquid-glass-subtle text-sm outline-none" />
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${['✦', '✧', '◉', '◎', '◈', '❖', '☾', '☼', '〰', '⚡︎'].map(sym => `
+                  <button type="button" onclick="document.getElementById('custom-mood-emoji').value='${sym}'"
+                    class="w-8 h-8 rounded-xl liquid-pill-btn text-xs font-bold flex items-center justify-center">${sym}</button>
+                `).join('')}
+              </div>
+
+              ${state.customMoods.length > 0 ? `
+                <div class="pt-2 border-t border-current/10">
+                  <p class="text-[11px] opacity-65 mb-2">${state.lang === 'zh' ? '已建立的自訂心情（點擊可移除）：' : 'Your Custom Moods (tap to remove):'}</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    ${state.customMoods.map(cm => `
+                      <button onclick="deleteCustomMood('${cm.id}')" class="px-2.5 py-1 rounded-full liquid-pill-btn text-xs flex items-center gap-1">
+                        <span>${escapeHtml(cm.emoji)}</span>
+                        <span>${state.lang === 'zh' ? escapeHtml(cm.zh) : escapeHtml(cm.en)}</span>
+                        <span class="opacity-60 ml-0.5">×</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+              <button onclick="closeModal()" class="px-4 py-2 rounded-2xl liquid-pill-btn text-xs font-semibold">${t('cancelBtn')}</button>
+              <button onclick="saveCustomMood()" class="px-4 py-2 rounded-2xl mono-solid-btn text-xs font-semibold">${t('saveBtn')}</button>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function saveCustomMood() {
+      const emoji = (document.getElementById('custom-mood-emoji').value || '✦').trim();
+      const zh = document.getElementById('custom-mood-zh').value.trim();
+      const en = document.getElementById('custom-mood-en').value.trim() || zh;
+      if (!zh) return;
+
+      const newMood = {
+        id: 'cmood_' + Date.now(),
+        emoji,
+        zh,
+        en
+      };
+      state.customMoods.push(newMood);
+      state.moodLogs[state.selectedDate] = newMood.id;
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function deleteCustomMood(moodId) {
+      state.customMoods = state.customMoods.filter(m => m.id !== moodId);
+      saveState();
+      openCustomMoodModal();
+      renderApp();
+    }
+
+    // --- Quick Journal (Auto-save) ---
+    let journalSaveTimer = null;
+    function handleJournalInput(value) {
+      const dateStr = state.selectedDate;
+      state.journals[dateStr] = {
+        content: value,
+        updatedAt: new Date().toISOString()
+      };
+      const countEl = document.getElementById('journal-char-count');
+      if (countEl) {
+        countEl.textContent = `${value.length} ${t('charsCount')}`;
+      }
+      clearTimeout(journalSaveTimer);
+      journalSaveTimer = setTimeout(() => {
+        saveState();
+        const statusEl = document.getElementById('journal-save-status');
+        if (statusEl) {
+          statusEl.textContent = t('savedAuto');
+        }
+      }, 240);
+    }
+
+    // --- Annual Goals ---
+    function openGoalModal(goalId = null) {
+      const existing = goalId ? state.annualGoals.find(g => g.id === goalId) : null;
+      const modalRoot = document.getElementById('modal-root');
+      modalRoot.innerHTML = `
+        <div class="glass-modal-backdrop" onclick="if(event.target===this) closeModal()">
+          <div class="liquid-glass-elevated rounded-3xl p-5 w-full max-w-md space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold">${t('createGoalTitle')} (${state.selectedYear})</h3>
+              <button onclick="closeModal()" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-medium opacity-70 mb-1">${t('goalTitleLabel')}</label>
+                <input id="goal-title-input" type="text" value="${existing ? escapeHtml(existing.title) : ''}"
+                  placeholder="${state.lang === 'zh' ? '例如：完成年度攝影集或深度閱讀 24 本書' : 'e.g., Read 24 books this year'}"
+                  class="w-full px-3.5 py-2.5 rounded-2xl liquid-glass-subtle text-sm outline-none focus:ring-1 focus:ring-current" />
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('goalCategoryLabel')}</label>
+                  <input id="goal-cat-input" type="text" value="${existing ? escapeHtml(existing.category) : (state.lang === 'zh' ? '個人秩序' : 'Focus')}"
+                    class="w-full px-3.5 py-2 rounded-2xl liquid-glass-subtle text-xs outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium opacity-70 mb-1">${t('goalProgressLabel')}: <span id="goal-prog-val">${existing ? existing.progress : 0}%</span></label>
+                  <input id="goal-prog-input" type="range" min="0" max="100" step="5" value="${existing ? existing.progress : 0}"
+                    oninput="document.getElementById('goal-prog-val').textContent = this.value + '%'"
+                    class="w-full mt-2 accent-neutral-900 dark:accent-white" />
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2">
+              ${existing ? `<button onclick="deleteAnnualGoal('${existing.id}')" class="px-3.5 py-2 rounded-2xl text-xs font-semibold liquid-pill-btn opacity-75">${t('deleteBtn')}</button>` : '<div></div>'}
+              <div class="flex items-center gap-2">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-2xl liquid-pill-btn text-xs font-semibold">${t('cancelBtn')}</button>
+                <button onclick="saveAnnualGoal('${existing ? existing.id : ''}')" class="px-4 py-2 rounded-2xl mono-solid-btn text-xs font-semibold">${t('saveBtn')}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function saveAnnualGoal(goalId) {
+      const title = document.getElementById('goal-title-input').value.trim();
+      const category = document.getElementById('goal-cat-input').value.trim() || 'Goal';
+      const progress = Number(document.getElementById('goal-prog-input').value || 0);
+      if (!title) return;
+
+      if (goalId) {
+        const g = state.annualGoals.find(x => x.id === goalId);
+        if (g) {
+          g.title = title;
+          g.category = category;
+          g.progress = progress;
+          g.completed = progress >= 100;
+        }
+      } else {
+        state.annualGoals.push({
+          id: 'goal_' + Date.now(),
+          year: state.selectedYear,
+          title,
+          category,
+          progress,
+          completed: progress >= 100,
+          createdAt: new Date().toISOString()
+        });
+      }
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function deleteAnnualGoal(goalId) {
+      state.annualGoals = state.annualGoals.filter(g => g.id !== goalId);
+      saveState();
+      closeModal();
+      renderApp();
+    }
+
+    function quickIncrementGoal(goalId, delta) {
+      const g = state.annualGoals.find(x => x.id === goalId);
+      if (!g) return;
+      g.progress = Math.max(0, Math.min(100, (g.progress || 0) + delta));
+      g.completed = g.progress >= 100;
+      saveState();
+      renderApp();
+    }
+
+    // --- Backup & Export/Import Modal ---
+    function openBackupModal() {
+      const modalRoot = document.getElementById('modal-root');
+      modalRoot.innerHTML = `
+        <div class="glass-modal-backdrop" onclick="if(event.target===this) closeModal()">
+          <div class="liquid-glass-elevated rounded-3xl p-5 w-full max-w-md space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold">${t('backupTitle')}</h3>
+              <button onclick="closeModal()" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <p class="text-xs leading-relaxed opacity-75">${t('backupDesc')}</p>
+            <div class="liquid-glass-subtle rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-center">
+              <div>
+                <div class="text-xl font-bold editorial-num">${state.tasks.length}</div>
+                <div class="text-[11px] opacity-65">${state.lang === 'zh' ? '任務總數' : 'Tasks'}</div>
+              </div>
+              <div>
+                <div class="text-xl font-bold editorial-num">${state.habits.length}</div>
+                <div class="text-[11px] opacity-65">${state.lang === 'zh' ? '習慣項目' : 'Habits'}</div>
+              </div>
+              <div>
+                <div class="text-xl font-bold editorial-num">${Object.keys(state.journals).length}</div>
+                <div class="text-[11px] opacity-65">${state.lang === 'zh' ? '日記篇數' : 'Journals'}</div>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2 pt-1">
+              <button onclick="exportDataJson()" class="flex-1 py-2.5 px-4 rounded-2xl mono-solid-btn text-xs font-semibold flex items-center justify-center gap-1.5">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>${t('exportJsonBtn')}</span>
+              </button>
+              <label class="flex-1 py-2.5 px-4 rounded-2xl liquid-pill-btn text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <span>${t('importJsonBtn')}</span>
+                <input type="file" accept=".json" onchange="importDataJson(event)" class="hidden" />
+              </label>
+            </div>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function exportDataJson() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `mono-glass-backup-${TODAY_KEY}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(state.lang === 'zh' ? '已下載備份檔案' : 'Backup downloaded');
+    }
+
+    function importDataJson(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported && typeof imported === 'object') {
+            state = {
+              ...state,
+              ...imported,
+              tasks: Array.isArray(imported.tasks) ? imported.tasks : state.tasks,
+              habits: Array.isArray(imported.habits) ? imported.habits : state.habits,
+              habitLogs: imported.habitLogs || state.habitLogs,
+              journals: imported.journals || state.journals,
+              moodLogs: imported.moodLogs || state.moodLogs,
+              customMoods: Array.isArray(imported.customMoods) ? imported.customMoods : state.customMoods,
+              annualGoals: Array.isArray(imported.annualGoals) ? imported.annualGoals : state.annualGoals
+            };
+            saveState();
+            closeModal();
+            renderApp();
+            showToast(state.lang === 'zh' ? '資料已成功還原' : 'Data restored');
+          }
+        } catch (err) {
+          showToast(state.lang === 'zh' ? '檔案格式無效' : 'Invalid JSON file');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-root').innerHTML = '';
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = 'liquid-glass-elevated px-4 py-2 rounded-full text-xs font-semibold shadow-lg transition-all duration-300';
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(6px)';
+        setTimeout(() => el.remove(), 300);
+      }, 2000);
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    /* ==========================================================================
+       5. View Renderers (Monochrome Today, Week, Month, Year & Goals)
+       ========================================================================== */
+    function renderApp() {
+      applyTheme();
+
+      ['today', 'week', 'month', 'year'].forEach(v => {
+        const btn = document.getElementById(`nav-${v}`);
+        if (btn) btn.classList.toggle('active', state.activeView === v);
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+      });
+
+      const langBadge = document.getElementById('lang-badge');
+      if (langBadge) langBadge.textContent = state.lang === 'zh' ? 'EN' : '中';
+
+      const headerTitle = document.getElementById('header-title');
+      const headerSubtitle = document.getElementById('header-subtitle');
+      const todayPill = document.getElementById('today-pill');
+
+      const titleMap = {
+        today: t('viewTitleToday'),
+        week: t('viewTitleWeek'),
+        month: t('viewTitleMonth'),
+        year: t('viewTitleYear')
+      };
+      headerTitle.textContent = titleMap[state.activeView] || t('viewTitleToday');
+      headerSubtitle.textContent = formatHumanDate(state.selectedDate);
+
+      if (state.selectedDate !== formatDateKey(new Date())) {
+        todayPill.classList.remove('hidden');
+        todayPill.textContent = t('backToToday');
+      } else {
+        todayPill.classList.add('hidden');
+      }
+
+      const container = document.getElementById('app-content');
+      container.classList.remove('view-enter');
+      void container.offsetWidth;
+      container.classList.add('view-enter');
+
+      if (state.activeView === 'today') {
+        container.innerHTML = renderTodayView();
+      } else if (state.activeView === 'week') {
+        container.innerHTML = renderWeekView();
+      } else if (state.activeView === 'month') {
+        container.innerHTML = renderMonthView();
+      } else if (state.activeView === 'year') {
+        container.innerHTML = renderYearView();
+      }
+
+      lucide.createIcons();
+    }
+
+    // --------------------------------------------------------------------------
+    // VIEW 1: TODAY HOME (今日主頁)
+    // --------------------------------------------------------------------------
+    function renderTodayView() {
+      const dateStr = state.selectedDate;
+      const dayTasks = state.tasks.filter(t => t.date === dateStr);
+      const priorityTasks = dayTasks.filter(t => t.priority);
+      const regularTasks = dayTasks.filter(t => !t.priority);
+
+      const completedHabits = state.habitLogs[dateStr] || [];
+      const totalItems = dayTasks.length + state.habits.length;
+      const doneItems = dayTasks.filter(t => t.completed).length +
+        state.habits.filter(h => completedHabits.includes(h.id)).length;
+      const progressPct = totalItems > 0 ? Math.round((doneItems / totalItems) * 100) : 0;
+
+      const allMoods = getAllMoods();
+      const selectedMoodId = state.moodLogs[dateStr];
+      const journalEntry = state.journals[dateStr] || { content: '' };
+
+      return `
+        <!-- Daily Monochrome Progress Strip -->
+        <section class="liquid-glass rounded-3xl p-4 mb-4 flex items-center justify-between gap-4">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-baseline justify-between mb-2">
+              <span class="text-[11px] font-semibold uppercase tracking-widest opacity-65">${t('dailyProgress')}</span>
+              <span class="text-xl font-bold editorial-num">${progressPct}%</span>
+            </div>
+            <div class="w-full h-2 rounded-full overflow-hidden" style="background: var(--ink-track);">
+              <div class="h-full rounded-full transition-all duration-500"
+                   style="width: ${progressPct}%; background: var(--ink-solid);"></div>
+            </div>
+          </div>
+          <div class="text-right shrink-0 pl-3 border-l border-current/15">
+            <div class="text-xl font-bold editorial-num">${doneItems}<span class="text-xs opacity-55 font-sans">/${totalItems}</span></div>
+            <div class="text-[10px] opacity-60 tracking-wide">${state.lang === 'zh' ? '今日達成' : 'Done'}</div>
+          </div>
+        </section>
+
+        <!-- iPhone Duo Dual-Column Adaptive Grid -->
+        <div class="duo-grid space-y-4 sm:space-y-0">
+          <!-- Left / Top Column: Priority Focus & To-Do List -->
+          <div class="space-y-4">
+            <!-- Priority Tasks Card (重點任務標記) -->
+            <section class="liquid-glass rounded-3xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                    <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                  </span>
+                  <h2 class="text-sm font-bold tracking-tight">${t('prioritySection')}</h2>
+                </div>
+                <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full mono-badge">
+                  ${priorityTasks.length}
+                </span>
+              </div>
+
+              ${priorityTasks.length === 0 ? `
+                <p class="text-xs opacity-60 py-2 px-1">${t('noPriorityTasks')}</p>
+              ` : `
+                <div class="space-y-2">
+                  ${priorityTasks.map(task => renderTaskRow(task, true)).join('')}
+                </div>
+              `}
+            </section>
+
+            <!-- Today's To-Do List Card -->
+            <section class="liquid-glass rounded-3xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                    <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <h2 class="text-sm font-bold tracking-tight">${t('todoSection')}</h2>
+                </div>
+                <span class="text-xs opacity-65 font-mono">${regularTasks.filter(x => x.completed).length}/${regularTasks.length}</span>
+              </div>
+
+              <!-- Quick Add Task Form -->
+              <form onsubmit="handleAddTask(event)" class="flex items-center gap-1.5 mb-3">
+                <input id="new-task-input" type="text" placeholder="${t('addTaskPlaceholder')}"
+                  class="flex-1 min-w-0 px-3.5 py-2.5 rounded-2xl liquid-glass-subtle text-sm outline-none placeholder:opacity-50 focus:ring-1 focus:ring-current" />
+                <button type="button" id="new-task-priority-flag" data-priority="false" onclick="toggleNewTaskPriorityFlag()"
+                  title="${state.lang === 'zh' ? '設為重點任務' : 'Mark as Priority'}"
+                  class="w-10 h-10 rounded-2xl liquid-pill-btn flex items-center justify-center shrink-0">
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                </button>
+                <button type="submit" class="px-3.5 h-10 rounded-2xl mono-solid-btn text-xs font-semibold shrink-0">
+                  ${t('addBtn')}
+                </button>
+              </form>
+
+              <!-- Task Items List -->
+              ${regularTasks.length === 0 ? `
+                <p class="text-xs opacity-60 text-center py-4">${t('noTasksToday')}</p>
+              ` : `
+                <div class="space-y-2">
+                  ${regularTasks.map(task => renderTaskRow(task, false)).join('')}
+                </div>
+              `}
+            </section>
+          </div>
+
+          <!-- Right / Bottom Column: Daily Habits, Mood Tracker & Quick Journal -->
+          <div class="space-y-4">
+            <!-- Daily Habit Management -->
+            <section class="liquid-glass rounded-3xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                    <i data-lucide="repeat" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <h2 class="text-sm font-bold tracking-tight">${t('habitSection')}</h2>
+                </div>
+                <button onclick="openHabitModal()" class="px-2.5 py-1 rounded-full liquid-pill-btn text-xs font-semibold flex items-center gap-1">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                  <span>${t('addHabitBtn')}</span>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 gap-2">
+                ${state.habits.map(habit => {
+                  const isDone = completedHabits.includes(habit.id);
+                  const streak = calculateHabitStreak(habit.id);
+                  return `
+                    <div class="liquid-glass-subtle rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 transition ${isDone ? 'border-current/40' : ''}"
+                         style="${isDone ? 'background: var(--ink-muted-fill);' : ''}">
+                      <button onclick="toggleHabitForDate('${habit.id}')" class="flex items-center gap-3 flex-1 min-w-0 text-left">
+                        <span class="w-7 h-7 rounded-xl mono-badge flex items-center justify-center text-sm font-bold shrink-0 mono-symbol">${escapeHtml(habit.icon)}</span>
+                        <div class="min-w-0">
+                          <div class="text-sm font-semibold truncate ${isDone ? 'line-through opacity-60' : ''}">
+                            ${state.lang === 'zh' ? escapeHtml(habit.title) : escapeHtml(habit.titleEn || habit.title)}
+                          </div>
+                          <div class="text-[11px] opacity-60 font-mono">
+                            ${streak} ${t('streakUnit')}
+                          </div>
+                        </div>
+                      </button>
+                      <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="openHabitModal('${habit.id}')" class="w-7 h-7 rounded-full hover:opacity-100 flex items-center justify-center opacity-50">
+                          <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button onclick="toggleHabitForDate('${habit.id}')"
+                          class="w-8 h-8 rounded-xl flex items-center justify-center transition ${isDone ? 'mono-solid-btn' : 'liquid-pill-btn'}">
+                          <i data-lucide="check" class="w-4 h-4"></i>
+                        </button>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </section>
+
+            <!-- Mood Tracker & Custom Moods (Monochrome High-Contrast Inversion) -->
+            <section class="liquid-glass rounded-3xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                    <i data-lucide="circle-dot" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <h2 class="text-sm font-bold tracking-tight">${t('moodSection')}</h2>
+                </div>
+                <button onclick="openCustomMoodModal()" class="px-2.5 py-1 rounded-full liquid-pill-btn text-xs font-semibold">
+                  ${t('customMoodBtn')}
+                </button>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                ${allMoods.map(m => {
+                  const active = selectedMoodId === m.id;
+                  return `
+                    <button onclick="selectMoodForDate('${m.id}')"
+                      class="px-3 py-2 rounded-2xl flex items-center gap-1.5 text-xs font-semibold transition ${active ? 'mono-solid-btn scale-105' : 'liquid-pill-btn'}">
+                      <span class="text-sm leading-none mono-symbol">${escapeHtml(m.emoji)}</span>
+                      <span>${state.lang === 'zh' ? escapeHtml(m.zh) : escapeHtml(m.en)}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </section>
+
+            <!-- Quick Journal (隨手日記) -->
+            <section class="liquid-glass rounded-3xl p-4">
+              <div class="flex items-center justify-between mb-2.5">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                    <i data-lucide="feather" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <h2 class="text-sm font-bold tracking-tight">${t('journalSection')}</h2>
+                </div>
+                <span id="journal-save-status" class="text-[11px] opacity-60">${t('savedAuto')}</span>
+              </div>
+
+              <textarea id="quick-journal-textarea" rows="5"
+                oninput="handleJournalInput(this.value)"
+                placeholder="${t('journalPlaceholder')}"
+                class="w-full p-3.5 rounded-2xl liquid-glass-subtle text-sm leading-relaxed outline-none resize-none placeholder:opacity-50 focus:ring-1 focus:ring-current">${escapeHtml(journalEntry.content || '')}</textarea>
+
+              <div class="flex items-center justify-between mt-1.5 px-1 text-[11px] opacity-60 font-mono">
+                <span>${dateStr}</span>
+                <span id="journal-char-count">${(journalEntry.content || '').length} ${t('charsCount')}</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTaskRow(task, isPrioritySection) {
+      return `
+        <div class="liquid-glass-subtle rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2.5 transition ${isPrioritySection ? 'priority-card-highlight' : ''}">
+          <button onclick="toggleTaskComplete('${task.id}')" class="glass-checkbox ${task.completed ? 'checked' : ''}" aria-label="Toggle Task">
+            ${task.completed ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : ''}
+          </button>
+
+          <div onclick="openEditTaskModal('${task.id}')" class="flex-1 min-w-0 cursor-pointer py-0.5">
+            <p class="text-sm font-medium break-words ${task.completed ? 'line-through opacity-50' : ''}">
+              ${escapeHtml(task.title)}
+            </p>
+            ${task.note ? `<p class="text-[11px] opacity-55 truncate mt-0.5">${escapeHtml(task.note)}</p>` : ''}
+          </div>
+
+          <div class="flex items-center gap-1 shrink-0">
+            <button onclick="toggleTaskPriority('${task.id}')"
+              title="${state.lang === 'zh' ? '切換重點標記' : 'Toggle Priority'}"
+              class="w-8 h-8 rounded-xl flex items-center justify-center transition ${task.priority ? 'mono-solid-btn' : 'opacity-40 hover:opacity-100'}">
+              <i data-lucide="star" class="w-3.5 h-3.5 ${task.priority ? 'fill-current' : ''}"></i>
+            </button>
+            <button onclick="openEditTaskModal('${task.id}')"
+              class="w-8 h-8 rounded-xl flex items-center justify-center opacity-50 hover:opacity-100">
+              <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="deleteTask('${task.id}')"
+              class="w-8 h-8 rounded-xl flex items-center justify-center opacity-50 hover:opacity-100">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // --------------------------------------------------------------------------
+    // VIEW 2: WEEK VIEW (週檢視)
+    // --------------------------------------------------------------------------
+    function renderWeekView() {
+      const anchor = parseDateKey(state.selectedDate);
+      const dayOfWeek = anchor.getDay();
+      const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+      const monday = new Date(anchor);
+      monday.setDate(anchor.getDate() + mondayOffset);
+
+      const days = [];
+      let weekTasksTotal = 0;
+      let weekTasksDone = 0;
+      let weekHabitsDone = 0;
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const key = formatDateKey(d);
+        const tasks = state.tasks.filter(t => t.date === key);
+        const done = tasks.filter(t => t.completed).length;
+        const habitsDone = (state.habitLogs[key] || []).length;
+        const moodId = state.moodLogs[key];
+        const moodObj = getAllMoods().find(m => m.id === moodId);
+        const journal = state.journals[key];
+
+        weekTasksTotal += tasks.length;
+        weekTasksDone += done;
+        weekHabitsDone += habitsDone;
+
+        days.push({ date: d, key, tasks, done, habitsDone, moodObj, journal });
+      }
+
+      const weekdayNames = state.lang === 'zh'
+        ? ['週一', '週二', '週三', '週四', '週五', '週六', '週日']
+        : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+      return `
+        <!-- Week Summary Strip -->
+        <section class="liquid-glass rounded-3xl p-4 mb-4 flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-sm font-bold">${t('weekSummary')}</h2>
+            <p class="text-xs opacity-60 font-mono">${days[0].key} — ${days[6].key}</p>
+          </div>
+          <div class="flex items-center gap-5 text-right">
+            <div>
+              <div class="text-lg font-bold editorial-num">${weekTasksDone}/${weekTasksTotal}</div>
+              <div class="text-[10px] opacity-65">${t('tasksDoneLabel')}</div>
+            </div>
+            <div>
+              <div class="text-lg font-bold editorial-num">${weekHabitsDone}</div>
+              <div class="text-[10px] opacity-65">${t('habitsDoneLabel')}</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7-Day Interactive Liquid Glass Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          ${days.map((item, idx) => {
+            const isToday = item.key === TODAY_KEY;
+            const isSelected = item.key === state.selectedDate;
+            return `
+              <div onclick="selectDateAndOpenToday('${item.key}')"
+                class="liquid-glass rounded-3xl p-4 cursor-pointer hover:scale-[1.01] transition ${isSelected ? 'ring-1.5 ring-current' : ''}">
+                <div class="flex items-center justify-between mb-2.5">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-1 rounded-xl text-xs font-bold ${isToday ? 'mono-solid-btn' : 'mono-badge'}">
+                      ${weekdayNames[idx]} · ${item.date.getMonth() + 1}/${item.date.getDate()}
+                    </span>
+                    ${item.moodObj ? `<span class="text-sm font-bold mono-symbol" title="${escapeHtml(item.moodObj.zh)}">${escapeHtml(item.moodObj.emoji)}</span>` : ''}
+                  </div>
+                  <span class="text-xs font-mono opacity-65">
+                    ${item.done}/${item.tasks.length}
+                  </span>
+                </div>
+
+                <!-- Tasks Preview -->
+                <div class="space-y-1.5 mb-2.5 min-h-[44px]">
+                  ${item.tasks.length === 0 ? `
+                    <p class="text-xs opacity-45 italic py-1">${state.lang === 'zh' ? '無排程任務' : 'No tasks'}</p>
+                  ` : item.tasks.slice(0, 3).map(tk => `
+                    <div class="flex items-center gap-1.5 text-xs ${tk.completed ? 'line-through opacity-50' : ''}">
+                      <span class="font-mono text-[11px]">${tk.priority ? '★' : (tk.completed ? '■' : '□')}</span>
+                      <span class="truncate">${escapeHtml(tk.title)}</span>
+                    </div>
+                  `).join('')}
+                  ${item.tasks.length > 3 ? `<div class="text-[11px] opacity-55 font-mono">+${item.tasks.length - 3}</div>` : ''}
+                </div>
+
+                <!-- Footer Badges -->
+                <div class="flex items-center justify-between pt-2 border-t border-current/10 text-[11px] opacity-65 font-mono">
+                  <span>◇ ${item.habitsDone}/${state.habits.length}</span>
+                  <span>${item.journal && item.journal.content ? (state.lang === 'zh' ? '✎ 日記' : '✎ Note') : ''}</span>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // --------------------------------------------------------------------------
+    // VIEW 3: MONTH CALENDAR VIEW (月曆檢視)
+    // --------------------------------------------------------------------------
+    function stepCalendarMonth(delta) {
+      const [y, m] = state.calendarMonth.split('-').map(Number);
+      const d = new Date(y, m - 1 + delta, 1);
+      state.calendarMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      renderApp();
+    }
+
+    function selectCalendarDay(dateStr) {
+      state.selectedDate = dateStr;
+      renderApp();
+    }
+
+    function renderMonthView() {
+      const [year, month] = state.calendarMonth.split('-').map(Number);
+      const firstDay = new Date(year, month - 1, 1);
+      const lastDay = new Date(year, month, 0);
+      const startWeekday = firstDay.getDay();
+      const totalDays = lastDay.getDate();
+
+      const monthLabel = state.lang === 'zh'
+        ? `${year} 年 ${month} 月`
+        : firstDay.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+      const weekdays = state.lang === 'zh'
+        ? ['日', '一', '二', '三', '四', '五', '六']
+        : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      const allMoods = getAllMoods();
+      const cells = [];
+      for (let i = 0; i < startWeekday; i++) cells.push(null);
+      for (let d = 1; d <= totalDays; d++) {
+        cells.push(`${year}-${String(month).padStart(2, '0')}-${String(d).padStart(2, '0')}`);
+      }
+
+      const selTasks = state.tasks.filter(t => t.date === state.selectedDate);
+      const selMood = allMoods.find(m => m.id === state.moodLogs[state.selectedDate]);
+      const selJournal = state.journals[state.selectedDate];
+
+      return `
+        <div class="duo-grid space-y-4 sm:space-y-0">
+          <!-- Calendar Grid Card -->
+          <section class="liquid-glass rounded-3xl p-4">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-bold tracking-tight">${monthLabel}</h2>
+              <div class="flex items-center gap-1.5">
+                <button onclick="stepCalendarMonth(-1)" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button onclick="stepCalendarMonth(1)" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-7 gap-1 text-center text-[11px] font-semibold opacity-55 mb-2">
+              ${weekdays.map(w => `<div>${w}</div>`).join('')}
+            </div>
+
+            <div class="grid grid-cols-7 gap-1.5">
+              ${cells.map(dateKey => {
+                if (!dateKey) return `<div class="h-13"></div>`;
+                const dayNum = Number(dateKey.slice(-2));
+                const isToday = dateKey === TODAY_KEY;
+                const isSelected = dateKey === state.selectedDate;
+                const tasks = state.tasks.filter(t => t.date === dateKey);
+                const mood = allMoods.find(m => m.id === state.moodLogs[dateKey]);
+                const hasJournal = Boolean(state.journals[dateKey] && state.journals[dateKey].content);
+
+                return `
+                  <button onclick="selectCalendarDay('${dateKey}')"
+                    class="h-13 py-1.5 rounded-2xl flex flex-col items-center justify-between transition relative ${isSelected ? 'mono-solid-btn scale-105' : 'liquid-glass-subtle'} ${isToday && !isSelected ? 'ring-1.5 ring-current' : ''}">
+                    <span class="text-xs font-bold leading-none font-mono">${dayNum}</span>
+                    <div class="h-4 flex items-center justify-center text-xs leading-none mono-symbol">
+                      ${mood ? escapeHtml(mood.emoji) : (hasJournal ? '·' : '')}
+                    </div>
+                    <div class="flex gap-0.5 h-1">
+                      ${tasks.slice(0, 3).map(tk => `
+                        <span class="w-1 h-1 rounded-full ${isSelected ? 'bg-current' : (tk.completed ? 'bg-current opacity-90' : 'bg-current opacity-35')}"></span>
+                      `).join('')}
+                    </div>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Selected Date Preview Card -->
+          <section class="liquid-glass rounded-3xl p-4 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <span class="text-[11px] uppercase tracking-wider opacity-55">${t('selectedDayPreview')}</span>
+                  <h3 class="text-sm font-bold">${formatHumanDate(state.selectedDate)}</h3>
+                </div>
+                ${selMood ? `<span class="w-9 h-9 rounded-2xl mono-badge flex items-center justify-center text-base font-bold mono-symbol">${escapeHtml(selMood.emoji)}</span>` : ''}
+              </div>
+
+              <div class="space-y-2 mb-3">
+                ${selTasks.length === 0 ? `
+                  <p class="text-xs opacity-55 py-2">${t('noTasksToday')}</p>
+                ` : selTasks.map(tk => `
+                  <div class="liquid-glass-subtle rounded-2xl px-3 py-2 flex items-center justify-between text-xs">
+                    <span class="${tk.completed ? 'line-through opacity-50' : 'font-medium'}">${tk.priority ? '★ ' : ''}${escapeHtml(tk.title)}</span>
+                    <span class="font-mono">${tk.completed ? '■' : '□'}</span>
+                  </div>
+                `).join('')}
+              </div>
+
+              ${selJournal && selJournal.content ? `
+                <div class="liquid-glass-subtle rounded-2xl p-3 text-xs leading-relaxed opacity-85">
+                  <div class="font-semibold mb-1 opacity-65">✎ ${t('journalSection')}</div>
+                  <p class="line-clamp-4 whitespace-pre-line">${escapeHtml(selJournal.content)}</p>
+                </div>
+              ` : ''}
+            </div>
+
+            <button onclick="selectDateAndOpenToday('${state.selectedDate}')"
+              class="w-full py-2.5 rounded-2xl mono-solid-btn text-xs font-semibold flex items-center justify-center gap-1.5">
+              <span>${t('openInToday')}</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </section>
+        </div>
+      `;
+    }
+
+    // --------------------------------------------------------------------------
+    // VIEW 4: YEAR VIEW & ANNUAL GOALS (年度檢視 & 年度目標)
+    // --------------------------------------------------------------------------
+    function stepSelectedYear(delta) {
+      state.selectedYear += delta;
+      renderApp();
+    }
+
+    function renderYearView() {
+      const year = state.selectedYear;
+      const yearGoals = state.annualGoals.filter(g => Number(g.year) === Number(year));
+      const allMoods = getAllMoods();
+
+      // Build 12-month monochrome activity cards
+      const monthsHtml = Array.from({ length: 12 }, (_, mIdx) => {
+        const mNum = mIdx + 1;
+        const prefix = `${year}-${String(mNum).padStart(2, '0')}`;
+        const mTasks = state.tasks.filter(t => t.date && t.date.startsWith(prefix));
+        const mDone = mTasks.filter(t => t.completed).length;
+
+        let activeDays = 0;
+        let topMoodEmoji = '';
+        Object.keys(state.moodLogs).forEach(k => {
+          if (k.startsWith(prefix)) {
+            activeDays++;
+            const found = allMoods.find(m => m.id === state.moodLogs[k]);
+            if (found) topMoodEmoji = found.emoji;
+          }
+        });
+        Object.keys(state.journals).forEach(k => {
+          if (k.startsWith(prefix) && state.journals[k].content) activeDays++;
+        });
+
+        const monthName = state.lang === 'zh'
+          ? `${mNum}月`
+          : new Date(year, mIdx, 1).toLocaleDateString('en-US', { month: 'short' });
+
+        return `
+          <button onclick="jumpToMonth('${prefix}')"
+            class="liquid-glass-subtle rounded-2xl p-2.5 text-left hover:scale-[1.02] transition flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-bold">${monthName}</span>
+              <span class="text-xs font-bold opacity-75 mono-symbol">${topMoodEmoji || '○'}</span>
+            </div>
+            <div class="text-[11px] opacity-65 font-mono">
+              ${mDone}/${mTasks.length}
+            </div>
+            <div class="w-full h-1.5 rounded-full mt-1.5 overflow-hidden" style="background: var(--ink-track);">
+              <div class="h-full rounded-full" style="width: ${Math.min(100, activeDays * 6)}%; background: var(--ink-solid);"></div>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      return `
+        <div class="duo-grid space-y-4 sm:space-y-0">
+          <!-- Annual Goals Card (年度目標) -->
+          <section class="liquid-glass rounded-3xl p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-xl mono-badge flex items-center justify-center">
+                  <i data-lucide="target" class="w-3.5 h-3.5"></i>
+                </span>
+                <h2 class="text-sm font-bold">${year} · ${t('annualGoalsTitle')}</h2>
+              </div>
+              <button onclick="openGoalModal()" class="px-2.5 py-1 rounded-full mono-solid-btn text-xs font-semibold flex items-center gap-1">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>${t('addGoalBtn')}</span>
+              </button>
+            </div>
+
+            ${yearGoals.length === 0 ? `
+              <p class="text-xs opacity-60 py-6 text-center">${t('noGoalsYet')}</p>
+            ` : `
+              <div class="space-y-3">
+                ${yearGoals.map(goal => `
+                  <div class="liquid-glass-subtle rounded-2xl p-3.5 space-y-2">
+                    <div class="flex items-start justify-between gap-2">
+                      <div>
+                        <span class="inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full mono-badge mb-1">
+                          ${escapeHtml(goal.category)}
+                        </span>
+                        <h3 class="text-sm font-bold ${goal.completed ? 'line-through opacity-55' : ''}">${escapeHtml(goal.title)}</h3>
+                      </div>
+                      <button onclick="openGoalModal('${goal.id}')" class="w-7 h-7 rounded-full liquid-pill-btn flex items-center justify-center shrink-0">
+                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                      </button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <div class="flex-1 h-2 rounded-full overflow-hidden" style="background: var(--ink-track);">
+                        <div class="h-full rounded-full transition-all duration-300"
+                             style="width: ${goal.progress}%; background: var(--ink-solid);"></div>
+                      </div>
+                      <span class="text-xs font-bold w-9 text-right font-mono">${goal.progress}%</span>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-1.5 pt-0.5">
+                      <button onclick="quickIncrementGoal('${goal.id}', -10)" class="px-2 py-0.5 rounded-lg liquid-pill-btn text-[11px] font-mono font-semibold">-10%</button>
+                      <button onclick="quickIncrementGoal('${goal.id}', 10)" class="px-2 py-0.5 rounded-lg liquid-pill-btn text-[11px] font-mono font-semibold">+10%</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </section>
+
+          <!-- 12-Month Overview Matrix (年度檢視) -->
+          <section class="liquid-glass rounded-3xl p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-sm font-bold">${t('yearHeatmapTitle')}</h2>
+              <div class="flex items-center gap-1.5">
+                <button onclick="stepSelectedYear(-1)" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <span class="text-xs font-bold px-1 font-mono">${year}</span>
+                <button onclick="stepSelectedYear(1)" class="w-8 h-8 rounded-full liquid-pill-btn flex items-center justify-center">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5">
+              ${monthsHtml}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function jumpToMonth(yyyyMm) {
+      state.calendarMonth = yyyyMm;
+      state.selectedDate = `${yyyyMm}-01`;
+      state.activeView = 'month';
+      saveState();
+      renderApp();
+    }
+
+    /* ==========================================================================
+       6. Initialize Application on Window Load
+       ========================================================================== */
+    window.onload = function () {
+      loadAndMigrateStorage();
+      renderApp();
+    };
+  </script>
+</body>
+</html>
